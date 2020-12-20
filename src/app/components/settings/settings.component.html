@@ -1,0 +1,37 @@
+<div class="settings__container">
+  <div class="settings__form--item">
+    <mat-form-field appearance="outline" class="settings__form--field--item">
+      <mat-label>Project ID</mat-label>
+      <input matInput #idInput disabled value="skldfjsdkjfl">
+    </mat-form-field>
+  </div>
+  <div class="settings__form--item">
+    <mat-form-field hintLabel="Max 30 characters" appearance="outline" class="settings__form--field--item">
+      <mat-label>Project name</mat-label>
+      <input maxlength="30" matInput #nameInput>
+      <mat-hint align="end">{{nameInput.value?.length || 0}}/30</mat-hint>
+      <!-- <mat-error *ngIf="projectName.invalid">Please type in a name</mat-error> -->
+    </mat-form-field>
+  </div>
+  <div class="settings__form--item">
+    <mat-form-field appearance="outline" class="settings__form--field--item--mid">
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date">
+        <input matEndDate placeholder="End date">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker startView="year"></mat-date-range-picker>
+      <mat-hint>Choose your time period.</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="settings__form--item">
+    <mat-form-field appearance="outline" class="settings__form--field--item--mid">
+      <mat-label>Tax system (country)</mat-label>
+      <mat-select [(ngModel)]="selectedCountry">
+        <mat-option>No tax system</mat-option>
+        <mat-option *ngFor="let country of taxCountries" [value]="country?.rates" #taxSelect>{{country.name}}</mat-option>
+      </mat-select>
+      <mat-hint>{{selectedCountry | taxRates}}</mat-hint>
+    </mat-form-field>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "glance-liquidity": {
+      "hosting": {
+        "forest-app": [
+          "glance-liquidity"
+        ]
+      }
+    }
+  }
+}
