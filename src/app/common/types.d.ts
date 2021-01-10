@@ -1,19 +1,3 @@
-
-// Enums
-// export enum ECountryCode {
-//   AT,
-//   BE,
-//   DE,
-//   PT
-// }
-
-// export enum ETaxInterval {
-//   MONTHLY,
-//   MONTHLYOFF,
-//   TRIMESTRAL,
-//   YEARLY
-// }
-
 // Type elemental
 declare type TPid = string;
 

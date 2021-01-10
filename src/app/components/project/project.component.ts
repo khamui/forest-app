@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { AuthService } from  '../../common/auth.service';
 import { SettingsService } from 'src/app/common/settings.service';
 import { UserService } from 'src/app/common/user.service';
 
@@ -8,7 +8,7 @@ import { UserService } from 'src/app/common/user.service';
   selector: 'app-project',
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.sass'],
-  providers: [SettingsService, UserService]
+  providers: [AuthService, SettingsService, UserService]
 })
 export class ProjectComponent implements OnInit {
   pid?: TPid;
@@ -16,6 +16,7 @@ export class ProjectComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    public as: AuthService,
     public ses: SettingsService,
     public us: UserService
   ) {

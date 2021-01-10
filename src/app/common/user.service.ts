@@ -1,5 +1,20 @@
 import { Injectable } from '@angular/core';
 
+// Enums
+enum ECountryCode {
+  AT,
+  BE,
+  DE,
+  PT
+}
+
+enum ETaxInterval {
+  MONTHLY,
+  MONTHLYOFF,
+  TRIMESTRAL,
+  YEARLY
+}
+
 @Injectable()
 export class UserService {
   user: TUser;
@@ -26,8 +41,8 @@ export class UserService {
       settings: {
           startDate: new Date,
           period: 1,
-          taxSystem: 0,
-          taxInterval: 0,
+          taxSystem: ECountryCode.DE,
+          taxInterval: ETaxInterval.MONTHLYOFF,
       },
       data: {
           expenses: [],

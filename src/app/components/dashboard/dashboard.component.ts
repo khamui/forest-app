@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/common/user.service';
-import { AuthService } from  '../../common/auth.service';
+
 import { Router } from  "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.sass'],
-  providers: [AuthService, UserService]
+  providers: [UserService]
 })
 export class DashboardComponent {
 
   constructor(
-    public as: AuthService,
     public us: UserService,
     private router: Router,
   ) {
@@ -22,7 +21,7 @@ export class DashboardComponent {
     console.log(this.us);
   }
 
-  navigateToProject(id: string) {
-    this.router.navigate(['project', id]);
+  navigateTo(project: TPid) {
+    this.router.navigate(['project', project]);
   }
 }
