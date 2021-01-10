@@ -1,7 +1,7 @@
-import { Tax.Service } from './tax.service';
+import { TaxService } from './tax.service';
 
-describe('Tax.Service', () => {
+describe('TaxService', () => {
   it('should create an instance', () => {
-    expect(new Tax.Service()).toBeTruthy();
+    expect(new TaxService()).toBeTruthy();
   });
 });

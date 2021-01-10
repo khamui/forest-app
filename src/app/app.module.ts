@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Material Modules
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -31,6 +32,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 
 // Custom Pipes
 import { TaxRatesPipe } from './common/tax-rates.pipe'
+import { ToYearPipe } from './common/to-year.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { TaxRatesPipe } from './common/tax-rates.pipe'
     DashboardComponent,
     SheetsComponent,
     SettingsComponent,
-    TaxRatesPipe
+    TaxRatesPipe,
+    ToYearPipe
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -57,7 +60,8 @@ import { TaxRatesPipe } from './common/tax-rates.pipe'
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [MatDatepickerModule, MatNativeDateModule],
   bootstrap: [AppComponent]

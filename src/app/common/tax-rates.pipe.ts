@@ -1,20 +1,24 @@
 
+import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
 import { Pipe, PipeTransform } from '@angular/core';
 /*
- * Raise the value exponentially
- * Takes an exponent argument that defaults to 1.
- * Usage:
- *   value | exponentialStrength:exponent
- * Example:
- *   {{ 2 | exponentialStrength:10 }}
+ * Transform input into readable String (used as hint in UI)
+ * Example: Taxes: --> Reduced : 7 (%) --> Standard : 19 (%)
 */
 @Pipe({name: 'taxRates'})
 export class TaxRatesPipe implements PipeTransform {
-  transform(values: any[]): string {
+  transform(values: any[]): {rates: []} {
     const concatenated = values?.reduce((prev, curr) => {
-      const taxItem = curr.rates.length ? ` --> ${curr.name}(%): ${curr.rates.toString()} ` : '';
+      const taxItem = curr.rates.length
+        ? TaxRatesPipe.GetString(curr.name, curr.rates)
+        : '';
       return prev + taxItem;
     }, 'Taxes: ');
-    return concatenated?.toString() || '';
+    return concatenated?.toString() ?? '';
+  }
+
+  static GetString(key: string, values: string[]) {
+    return ` --> ${key} : ${values.toString()
+      .replace(',', ' and ')} (%) `
   }
 }

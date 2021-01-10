@@ -32,13 +32,13 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-horizontal-stepper labelPosition="bottom" linear>
-      <mat-step label="Define your project parameters" completed="true">
+      <mat-step label="Define your project parameters" [completed]="this.ses.paramsCompleted">
         <settings></settings>
       </mat-step>
-      <mat-step label="Insert your numbers" completed="true">
+      <mat-step label="Insert your numbers" completed="false">
         <sheets></sheets>
       </mat-step>
-      <mat-step label="See what the future brings!" completed="true">
+      <mat-step label="See what the future brings!" completed="false">
         <span>Glance Analyzer</span>
       </mat-step>
     </mat-horizontal-stepper>

@@ -8,10 +8,11 @@ const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, ...canActivate(redirectLoggedInToDashboard) },
+  // { path: '', redirectTo: 'login', pathMatch: 'full' },
+  // { path: 'login', component: LoginComponent, ...canActivate(redirectLoggedInToDashboard) },
   // { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin)}
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent } // ...canActivate(redirectUnauthorizedToLogin)}
 ];
 
 @NgModule({
