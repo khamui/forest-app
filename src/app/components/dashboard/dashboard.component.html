@@ -1,46 +1,9 @@
-
-<mat-sidenav-container class="dashboard__container">
-  <mat-sidenav opened mode="side" class="dashboard__sidebar">
-    <div class="dashboard__sidebar--wrapper">
-      <div class="dashboard__sidebar--item">
-        <span>Areas</span>
-      </div>
-      <div class="dashboard__sidebar--item">
-        <button
-          mat-stroked-button
-          color="primary"
-        >
-          Item 1
-        </button>
-      </div>
-      <div class="dashboard__sidebar--item end">
-        <button mat-flat-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-          My Account
-        </button>
-        <mat-menu #menu="matMenu">
-          <div class="dashboard__sidebar--menu--item">
-            <button
-              mat-flat-button
-              (click)="this.as.logout()"
-            >
-              Logout
-            </button>
-          </div>
-        </mat-menu>
-      </div>
-    </div>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-horizontal-stepper labelPosition="bottom" linear>
-      <mat-step label="Define your project parameters" [completed]="this.ses.paramsCompleted">
-        <settings></settings>
-      </mat-step>
-      <mat-step label="Insert your numbers" completed="false">
-        <sheets></sheets>
-      </mat-step>
-      <mat-step label="See what the future brings!" completed="false">
-        <span>Glance Analyzer</span>
-      </mat-step>
-    </mat-horizontal-stepper>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<p *ngFor="let project of this.us.user.projects">
+  <button
+    (click)="this.navigateTo(project)"
+    mat-stroked-button
+    color="primary"
+  >
+    {{ project }}
+  </button>
+</p>
