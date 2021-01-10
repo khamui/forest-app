@@ -33,6 +33,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 // Custom Pipes
 import { TaxRatesPipe } from './common/tax-rates.pipe'
 import { ToYearPipe } from './common/to-year.pipe';
+import { ProjectComponent } from './components/project/project.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ToYearPipe } from './common/to-year.pipe';
     SheetsComponent,
     SettingsComponent,
     TaxRatesPipe,
-    ToYearPipe
+    ToYearPipe,
+    ProjectComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
