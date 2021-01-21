@@ -16,25 +16,29 @@ enum ETaxInterval {
 }
 
 @Injectable()
-export class UserService {
+export class UserService
+{
   user: TUser;
   projects: TProject[];
 
-  constructor() {
+  constructor()
+  {
     this.user = this.getUser();
     this.projects = this.getUserProjects();
   }
 
-  getUser(): TUser {
+  getUser(): TUser
+  {
     return {
-      uid: "BlablubHash",
-      name: "Kha",
-      email: "kha@kha.ke",
+      uid: 'BlablubHash',
+      name: 'Kha',
+      email: 'kha@kha.ke',
       projects: ['a', 'b']
     }
   }
 
-  getUserProjects(): TProject[] {
+  getUserProjects(): TProject[]
+  {
     return [{
       pid: 'a',
       name: 'New Project',

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class SettingsService {
+export class SettingsService
+{
   paramsCompleted: boolean;
 
-  constructor() {
+  constructor()
+  {
     this.paramsCompleted = false;
   }
 }

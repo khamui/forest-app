@@ -1,0 +1,69 @@
+## Some Random Notes
+[ ] Health Care?
+[ ] Language course
+
+## READING
+|| Philosophy 
+| Surf Science
+
+## CODING
+-> Learning: RegExp (starting)
+-> Learning: Vim (completing)
+-> Angular Masterclass -> Videos
+-> Coding:
+    - Forest App
+
+## ANGULAR MASTERCLASS
+   __ANGULAR BASICS__
+     - Using modules to structure imports/exports
+     - safe navigation / optional chaining! 
+     - one-way binding and event emit for communication
+     - test Injectable() only for external? or always?
+     - Observable and subscribe (.then) 
+     - http to change local files with get,post,delete,put methods
+     - test rxjs observables (toPromise) with async await
+
+## WORK
+- Coachmarks: BE update with build -> Facu
+- Blocked Workspaces:
+  - understand company billing structures!
+    - where to get the flags? And how to store it? Endpoint or CONFIG? -> Facu & Nax
+    - URLs (to Metronic: Webrand Companies, to New Billing: Desygner Business? -> Mariana
+    - Testing Desygner Business Companies (deleting and deleted companies)? -> Nax
+    - A deleted company's content is accessible? (Profile, Workspace Dropdown & Notifications)?
+  - zIndex fix -> done!
+  - translations -> done!
+  - styles (center modal etc) -> done
+  - testing if deleted company gets fetched -> not fetched yet! -> done
+    - if so, is it possible to show content? -> done
+  - conditions (isDeleted & hasAccountManager) -> done
+  - redirect billing -> done
+  - include isLegacy -> done 
+  - correct icon -> ??
+  - accessible areas should be clickable (for instance profile) -> done
+
+## PORTUGAL
+
+-> Health care:
+  a) Takeover 100% of costs within networ?
+  - depending on chosen plan
+  - biggest network in PT
+  - always have to contribute to a certain percentage (regarding plan)
+  b) Outside of network as well?
+  c) Services outside of Portugal?
+  d) Dental services? Estomatologia?
+  e) Costs for both?
+  - specialst (regular app.) - 15euro
+  - dentis: depending on the treatment - see documents!
+  - exams - 10%
+  - hospitalisation or surgery - 100%, fee (francia: 250 euros)
+  - minor surgeries (150 euros)
+  - free checkup every two years
+  - app and medical appoint. online (free)
+  - 91,38/monthly (-10%)
+  - 125 euros, toothccleaning,  only 30 percentage 40 euros, instead 68 euros!
+  - coverage aos estrangeiro, paying the price ourselves, then send receipt, refund 50%
+  - outside network, refund 50%
+
+
+

@@ -1,14 +1,16 @@
 
-import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
 import { Pipe, PipeTransform } from '@angular/core';
 /*
  * Transform input into readable String (used as hint in UI)
  * Example: Taxes: --> Reduced : 7 (%) --> Standard : 19 (%)
 */
-@Pipe({name: 'taxRates'})
-export class TaxRatesPipe implements PipeTransform {
-  transform(values: any[]): {rates: []} {
-    const concatenated = values?.reduce((prev, curr) => {
+@Pipe({ name: 'taxRates' })
+export class TaxRatesPipe implements PipeTransform
+{
+  transform(values: any[]): {rates: []}
+  {
+    const concatenated = values?.reduce((prev, curr) =>
+    {
       const taxItem = curr.rates.length
         ? TaxRatesPipe.GetString(curr.name, curr.rates)
         : '';
@@ -17,7 +19,8 @@ export class TaxRatesPipe implements PipeTransform {
     return concatenated?.toString() ?? '';
   }
 
-  static GetString(key: string, values: string[]) {
+  static GetString(key: string, values: string[]): string
+  {
     return ` --> ${key} : ${values.toString()
       .replace(',', ' and ')} (%) `
   }

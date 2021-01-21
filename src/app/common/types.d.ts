@@ -1,6 +1,14 @@
 // Type elemental
 declare type TPid = string;
-
+declare type TTaxCountries = {
+  code: string;
+  vat_prefix: string;
+  name: string;
+  rates: {
+      name: string;
+      rates: number[];
+  }[];
+}[]
 
 // Type compounds
 declare type TUser = {

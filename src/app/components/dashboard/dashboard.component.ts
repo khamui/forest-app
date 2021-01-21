@@ -1,27 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from 'src/app/common/user.service';
+import { Router } from '@angular/router';
 
-import { Router } from  "@angular/router";
-
-@Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.sass'],
+@Component
+({
+  selector: 'dashboard',
+  templateUrl: 'dashboard.component.html',
+  styleUrls: ['dashboard.component.sass'],
   providers: [UserService]
 })
-export class DashboardComponent {
-
-  constructor(
+export class DashboardComponent
+{
+  constructor
+  (
     public us: UserService,
     private router: Router,
-  ) {
+  ){}
+
+  ngOnInit(): void
+  {
+    // content
   }
 
-  ngOnInit(): void {
-    console.log(this.us);
-  }
-
-  navigateTo(project: TPid) {
+  navigateTo(project: TPid): void
+  {
     this.router.navigate(['project', project]);
   }
 }

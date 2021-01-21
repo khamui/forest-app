@@ -8,14 +8,16 @@ import { ProjectComponent } from './components/project/project.component';
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 
-const routes: Routes = [
+const routes: Routes =
+[
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, ...canActivate(redirectLoggedInToDashboard) },
-  { path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin)},
+  { path: 'dashboard', component: DashboardComponent, ...canActivate(redirectUnauthorizedToLogin) },
   { path: 'project/:id', component: ProjectComponent }
 ];
 
-@NgModule({
+@NgModule
+({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

@@ -1,0 +1,7 @@
+node_modules
+/src/app/common/tax.constants.ts
+/e2e/*
+/src/app/app.component.spec.ts
+/src/app/common/*.spec.ts
+/src/app/components/*/*.spec.ts
+/src/polyfills.ts

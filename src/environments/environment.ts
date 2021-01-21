@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyBtr6JWyQMOoCB53aT8SIj8QH60hxgjE4M",
-    authDomain: "glance-liquidity.firebaseapp.com",
-    databaseURL: "https://glance-liquidity.firebaseio.com",
-    projectId: "glance-liquidity",
-    storageBucket: "glance-liquidity.appspot.com",
-    messagingSenderId: "54961018549",
-    appId: "1:54961018549:web:17aad4170364c361a950fc"
+    apiKey: 'AIzaSyBtr6JWyQMOoCB53aT8SIj8QH60hxgjE4M',
+    authDomain: 'glance-liquidity.firebaseapp.com',
+    databaseURL: 'https://glance-liquidity.firebaseio.com',
+    projectId: 'glance-liquidity',
+    storageBucket: 'glance-liquidity.appspot.com',
+    messagingSenderId: '54961018549',
+    appId: '1:54961018549:web:17aad4170364c361a950fc'
   }
 };
 
