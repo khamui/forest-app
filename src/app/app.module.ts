@@ -7,23 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
-// Material Modules
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
+// External Modules
+import { MaterialModule } from './modules/material/material.module';
+import { FirebaseModule } from './modules/firebase/firebase.module';
 
-// Firebase Modules
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from '../environments/environment';
-
-// Custom Modules
+// Forest App Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -35,8 +23,10 @@ import { TaxRatesPipe } from './common/tax-rates.pipe'
 import { ToYearPipe } from './common/to-year.pipe';
 import { ProjectComponent } from './components/project/project.component';
 
-@NgModule({
-  declarations: [
+@NgModule
+({
+  declarations:
+  [
     AppComponent,
     LoginComponent,
     DashboardComponent,
@@ -46,26 +36,20 @@ import { ProjectComponent } from './components/project/project.component';
     ToYearPipe,
     ProjectComponent
   ],
-  imports: [
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
+  imports:
+  [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatStepperModule,
-    MatMenuModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule,
+    FirebaseModule
   ],
-  providers: [MatDatepickerModule, MatNativeDateModule],
-  bootstrap: [AppComponent]
+  bootstrap:
+  [
+    AppComponent
+  ]
 })
 export class AppModule { }
