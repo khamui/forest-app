@@ -1,11 +1,9 @@
 import { TAX_RATES } from './tax.constants';
 
-export class TaxService {
-
-  constructor() {
-  }
-
-  getTaxOptions() {
+export class TaxService
+{
+  getTaxOptions(): TTaxCountries
+  {
     return TAX_RATES;
   }
 }

@@ -8,9 +8,11 @@ import { Pipe, PipeTransform } from '@angular/core';
  * Example:
  *   {{ 2 | exponentialStrength:10 }}
 */
-@Pipe({name: 'toYear'})
-export class ToYearPipe implements PipeTransform {
-  transform(value: number): string {
+@Pipe({ name: 'toYear' })
+export class ToYearPipe implements PipeTransform
+{
+  transform(value: number): string
+  {
     if (value === 1) return `${value} year`;
     return `${value} years`;
   }

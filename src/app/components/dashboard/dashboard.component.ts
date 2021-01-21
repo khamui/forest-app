@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from 'src/app/common/user.service';
-import { Router } from  "@angular/router";
+import { Router } from '@angular/router';
 
 @Component
 ({
@@ -19,10 +19,10 @@ export class DashboardComponent
 
   ngOnInit(): void
   {
-    console.log(this.us);
+    // content
   }
 
-  navigateTo(project: TPid)
+  navigateTo(project: TPid): void
   {
     this.router.navigate(['project', project]);
   }

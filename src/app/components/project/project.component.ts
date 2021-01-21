@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from  '../../common/auth.service';
+import { AuthService } from '../../common/auth.service';
 import { SettingsService } from 'src/app/common/settings.service';
 import { UserService } from 'src/app/common/user.service';
 
@@ -16,7 +16,7 @@ import { UserService } from 'src/app/common/user.service';
     UserService
   ]
 })
-export class ProjectComponent implements OnInit
+export class ProjectComponent
 {
   pid?: TPid;
   current?: TProject;
@@ -27,13 +27,9 @@ export class ProjectComponent implements OnInit
     public as: AuthService,
     public ses: SettingsService,
     public us: UserService,
-  ){
+  )
+  {
     this.pid = this.route.snapshot.params.id;
     this.current = this.us.projects.find(p => p.pid === this.pid);
-  }
-
-  ngOnInit(): void
-  {
-    console.log(this.current);
   }
 }
