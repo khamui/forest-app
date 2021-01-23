@@ -13,7 +13,7 @@ export class AuthService
   constructor(public afAuth: AngularFireAuth, public router: Router)
   {
     this.afAuth.authState.subscribe(user =>
-      {
+    {
       if (user)
       {
         // this.user = user;
