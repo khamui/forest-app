@@ -22,6 +22,7 @@ export class SettingsComponent implements OnInit
   periods: any[];
   intervals: any[];
   groupControl: FormGroup;
+  meta = <TProjectMeta>{};
 
   get currentCountry(): any[]
   {
@@ -42,20 +43,33 @@ export class SettingsComponent implements OnInit
     ];
 
     this.groupControl = new FormGroup
-      ({
-        projectnameControl: new FormControl('', [Validators.required]),
-        startdateControl: new FormControl('', [Validators.required]),
-        periodControl: new FormControl('', [Validators.required]),
-        taxsystemControl: new FormControl('', [Validators.required]),
-        taxpayControl: new FormControl('', [Validators.required])
-      });
+    ({
+      projectnameControl: new FormControl('', [Validators.required]),
+      startdateControl: new FormControl('', [Validators.required]),
+      periodControl: new FormControl('', [Validators.required]),
+      taxsystemControl: new FormControl('', [Validators.required]),
+      taxpayControl: new FormControl('', [Validators.required])
+    });
 
     this.groupControl.statusChanges
       .subscribe(result => this.ses.paramsCompleted = result === 'VALID');
+
+    this.meta.pid = 'hashToBeFetched';
+    this.meta.settings = <TSettings>{};
   }
 
   ngOnInit(): void
   {
     this.taxCountries = this.ts.getTaxOptions();
+  }
+
+  handlerMeta(meta: Record<string, unknown>): void
+  {
+    Object.assign(this.meta, meta);
+  }
+
+  handlerSettings(setting: Record<string, unknown>): void
+  {
+    Object.assign(this.meta.settings, setting);
   }
 }

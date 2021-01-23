@@ -10,11 +10,11 @@
           Project name
         </mat-label>
         <input
-          maxlength="30"
-          matInput
           #nameField
+          matInput
+          maxlength="30"
+          (blur)="handlerMeta({name: nameField.value})"
           formControlName="projectnameControl"
-          placeholder="test"
           required
         >
         <mat-hint
@@ -39,7 +39,7 @@
           matInput
           #idField
           disabled
-          value="skldfjsdkjfl"
+          [value]="meta?.pid"
         >
       </mat-form-field>
     </div>
@@ -49,18 +49,20 @@
           Choose a starting date
         </mat-label>
         <input
+          #dateField
           matInput
+          (dateChange)="handlerSettings({startDate: dateField.value})"
           formControlName="startdateControl"
-          [matDatepicker]="picker"
+          [matDatepicker]="datePicker"
           required
         >
         <mat-datepicker-toggle
           matSuffix
-          [for]="picker"
+          [for]="datePicker"
         ></mat-datepicker-toggle>
         <mat-datepicker
-          #picker
-          startView="year">
+          #datePicker
+          startView="multi-year">
         </mat-datepicker>
         <mat-hint
           *ngIf="selectedPeriod">{{selectedPeriod}}
@@ -69,7 +71,9 @@
       <mat-form-field appearance="outline">
         <mat-label>Select a period</mat-label>
         <mat-select
+          #period
           formControlName="periodControl"
+          (selectionChange)="handlerSettings({period: period.value})"
           required
         >
           <mat-option
@@ -90,7 +94,9 @@
           Tax system (country)
         </mat-label>
         <mat-select
+          #taxSystem
           formControlName="taxsystemControl"
+          (selectionChange)="handlerSettings({taxSystem: taxSystem.value})"
           required
         >
           <mat-option>
@@ -111,7 +117,9 @@
       <mat-form-field appearance="outline">
         <mat-label>Tax payments</mat-label>
         <mat-select
+          #taxInterval
           formControlName="taxpayControl"
+          (selectionChange)="handlerSettings({taxInterval: taxInterval.value})"
           required
         >
           <mat-option

@@ -42,15 +42,17 @@ export class UserService
     return [{
       pid: 'a',
       name: 'New Project',
-      settings: {
-          startDate: new Date,
-          period: 1,
-          taxSystem: ECountryCode.DE,
-          taxInterval: ETaxInterval.MONTHLYOFF,
+      settings:
+      {
+        startDate: new Date,
+        period: 1,
+        taxSystem: ECountryCode.DE,
+        taxInterval: ETaxInterval.MONTHLYOFF,
       },
-      data: {
-          expenses: [],
-          revenues: [],
+      data:
+      {
+        expenses: [],
+        revenues: [],
       }
     }]
   }
