@@ -19,6 +19,7 @@
     "no-lone-blocks": "warn",
     "wrap-iife": "warn",
     // ERRORS
+    "indent": ["error", 2],
     "no-await-in-loop": "error",
     "no-new": "error",
     "require-await": "error",
