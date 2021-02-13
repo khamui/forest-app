@@ -23,6 +23,10 @@ import { TaxRatesPipe } from './common/tax-rates.pipe'
 import { ToYearPipe } from './common/to-year.pipe';
 import { ProjectComponent } from './components/project/project.component';
 
+// Global Providers
+import { ApiService } from 'src/app/common/api.service';
+import { ProjectService } from './common/project.service';
+
 @NgModule
 ({
   declarations:
@@ -46,6 +50,11 @@ import { ProjectComponent } from './components/project/project.component';
     ReactiveFormsModule,
     MaterialModule,
     FirebaseModule
+  ],
+  providers:
+  [
+    ApiService,
+    ProjectService
   ],
   bootstrap:
   [

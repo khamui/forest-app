@@ -18,8 +18,8 @@ import { UserService } from 'src/app/common/user.service';
 })
 export class ProjectComponent
 {
-  pid?: TPid;
-  current?: TProject;
+  id?: TPid;
+  current?: IProject;
 
   constructor
   (
@@ -29,7 +29,7 @@ export class ProjectComponent
     public us: UserService,
   )
   {
-    this.pid = this.route.snapshot.params.id;
-    this.current = this.us.projects.find(p => p.pid === this.pid);
+    this.id = this.route.snapshot.params.id;
+    this.current = this.us.projects.find(p => p.id === this.id);
   }
 }

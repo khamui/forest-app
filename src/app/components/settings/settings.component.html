@@ -10,18 +10,15 @@
           Project name
         </mat-label>
         <input
-          #nameField
           matInput
           maxlength="30"
-          (blur)="handlerMeta({name: nameField.value})"
-          formControlName="projectnameControl"
-          required
+          formControlName="nameControl"
         >
         <mat-hint
-          align="end">{{nameField.value?.length || 0}}/30
+          align="end">{{nameControl.value?.length || 0}}/30
         </mat-hint>
         <mat-error
-          *ngIf="groupControl.get('projectnameControl')?.hasError('required')"
+          *ngIf="nameControl?.hasError('required')"
         >
           Please set a name for your Project!
         </mat-error>
@@ -37,9 +34,8 @@
         </mat-label>
         <input
           matInput
-          #idField
+          [value]="pid"
           disabled
-          [value]="meta?.pid"
         >
       </mat-form-field>
     </div>
@@ -49,12 +45,9 @@
           Choose a starting date
         </mat-label>
         <input
-          #dateField
           matInput
-          (dateChange)="handlerSettings({startDate: dateField.value})"
           formControlName="startdateControl"
           [matDatepicker]="datePicker"
-          required
         >
         <mat-datepicker-toggle
           matSuffix
@@ -64,17 +57,11 @@
           #datePicker
           startView="multi-year">
         </mat-datepicker>
-        <mat-hint
-          *ngIf="selectedPeriod">{{selectedPeriod}}
-        </mat-hint>
-        </mat-form-field>
+      </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Select a period</mat-label>
         <mat-select
-          #period
           formControlName="periodControl"
-          (selectionChange)="handlerSettings({period: period.value})"
-          required
         >
           <mat-option
             [value]="period"
@@ -94,33 +81,23 @@
           Tax system (country)
         </mat-label>
         <mat-select
-          #taxSystem
           formControlName="taxsystemControl"
-          (selectionChange)="handlerSettings({taxSystem: taxSystem.value})"
-          required
         >
-          <mat-option>
-            No tax system
-          </mat-option>
           <mat-option
             *ngFor="let country of taxCountries"
-            [value]="country?.rates"
-            #taxSelect
+            [value]="country.name"
           >
-            {{country.name}}
+            {{country.name}} ({{country.code}})
           </mat-option>
         </mat-select>
-        <mat-hint *ngIf="currentCountry">
-          {{currentCountry | taxRates}}
+        <mat-hint *ngIf="taxsystemControl">
+          {{currentTaxSystem && (currentTaxSystem.rates | taxRates)}}
         </mat-hint>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Tax payments</mat-label>
         <mat-select
-          #taxInterval
           formControlName="taxpayControl"
-          (selectionChange)="handlerSettings({taxInterval: taxInterval.value})"
-          required
         >
           <mat-option
             [value]="interval"
@@ -130,6 +107,19 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+    </div>
+    <div class="settings__form--item">
+      <button mat-stroked-button
+        (click)="saveSettings()"
+        color="primary"
+        [disabled]="disabled"
+      >
+        Save
+      </button>
+      <div class="settings__action-spinner">
+        <mat-spinner diameter="20">
+        </mat-spinner>
+      </div>
     </div>
   </form>
 </div>

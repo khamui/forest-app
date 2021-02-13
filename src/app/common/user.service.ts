@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from 'src/app/common/api.service';
 
 // Enums
 enum ECountryCode {
@@ -18,36 +19,34 @@ enum ETaxInterval {
 @Injectable()
 export class UserService
 {
-  user: TUser;
-  projects: TProject[];
+  user: IUser | undefined;
+  projects: IProject[];
+  api: ApiService;
 
-  constructor()
+  constructor(api: ApiService)
   {
-    this.user = this.getUser();
+    this.api = api;
+    this.getUser();
     this.projects = this.getUserProjects();
   }
 
-  getUser(): TUser
+  getUser(): void
   {
-    return {
-      uid: 'BlablubHash',
-      name: 'Kha',
-      email: 'kha@kha.ke',
-      projects: ['a', 'b']
-    }
+    const user$ = this.api.readUser('LzsruTHY2HTyb6FIGTHzTPzQ4MQ2');
+    user$.subscribe(({ payload }) => this.user = payload.data());
   }
 
-  getUserProjects(): TProject[]
+  getUserProjects(): IProject[]
   {
     return [{
-      pid: 'a',
+      id: 'a',
       name: 'New Project',
       settings:
       {
         startDate: new Date,
         period: 1,
-        taxSystem: ECountryCode.DE,
-        taxInterval: ETaxInterval.MONTHLYOFF,
+        taxSystem: 'Belgium',
+        taxInterval: 'monthly',
       },
       data:
       {
