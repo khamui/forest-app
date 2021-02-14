@@ -14,8 +14,8 @@ import { take } from 'rxjs/operators';
 
 export class SettingsComponent implements OnInit
 {
-  pid: TPid;
   groupControl: FormGroup;
+  projectId: TPid = '';
   nameControl: FormControl;
   startdateControl: FormControl;
   periodControl: FormControl;
@@ -56,8 +56,6 @@ export class SettingsComponent implements OnInit
       'yearly'
     ];
 
-    // TODO: hardcoded
-    this.pid = 'Ft6eDwkG6I9Gi4Y1RZMM';
     this.nameControl = new FormControl('', [Validators.required]);
     this.startdateControl = new FormControl('', [Validators.required]);
     this.periodControl = new FormControl('', [Validators.required]);
@@ -85,6 +83,7 @@ export class SettingsComponent implements OnInit
 
   initForm(project: IProject): void
   {
+    this.projectId = project.id;
     this.nameControl.setValue(project.name);
     this.startdateControl.setValue(project.settings.startDate.toDate());
     this.periodControl.setValue(project.settings.period);
@@ -100,7 +99,7 @@ export class SettingsComponent implements OnInit
   {
     const meta: IProjectMeta =
     {
-      id: this.pid,
+      id: this.projectId,
       name: this.nameControl.value,
       settings:
       {
@@ -111,6 +110,6 @@ export class SettingsComponent implements OnInit
       }
     }
     this.changed = false;
-    this.ses.save(meta);
+    !!meta.id && this.ses.save(meta);
   }
 }

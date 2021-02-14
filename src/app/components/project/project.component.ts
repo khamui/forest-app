@@ -18,7 +18,6 @@ import { ProjectService } from 'src/app/common/project.service';
 })
 export class ProjectComponent implements OnInit
 {
-  id?: TPid;
   current?: IProject;
 
   constructor
@@ -28,12 +27,12 @@ export class ProjectComponent implements OnInit
     public ses: SettingsService,
     private ps: ProjectService,
   )
-  {
-    this.id = this.route.snapshot.params.id;
-  }
+  {}
 
   ngOnInit(): void
   {
+    this.route.paramMap
+      .subscribe(params => this.ps.setId(params.get('id') as TPid));
     this.ps.project
       .subscribe(({ payload }) => this.current = payload.data());
   }

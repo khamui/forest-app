@@ -5,12 +5,20 @@ import { ApiService } from 'src/app/common/api.service';
 @Injectable({ providedIn: 'root' })
 export class ProjectService
 {
-  id: TPid;
+  id: TPid = '';
   project: Observable<any> = <Observable<IProject>>{};
 
   constructor(private api: ApiService)
+  {}
+
+  public setId(id: TPid): void
   {
-    this.id = 'Ft6eDwkG6I9Gi4Y1RZMM';
+    this.id = id;
+    this.getProject();
+  }
+
+  getProject(): void
+  {
     this.project = this.api.readProject(this.id);
   }
 
