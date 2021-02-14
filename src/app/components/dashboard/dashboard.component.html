@@ -1,4 +1,4 @@
-<p *ngFor="let project of this.us.user.projects">
+<p *ngFor="let project of us.user?.projects">
   <button
     (click)="this.navigateTo(project)"
     mat-stroked-button

@@ -17,11 +17,6 @@ export class DashboardComponent
     private router: Router,
   ){}
 
-  ngOnInit(): void
-  {
-    // content
-  }
-
   navigateTo(project: TPid): void
   {
     this.router.navigate(['project', project]);

@@ -2,37 +2,51 @@ import { Component, OnInit } from '@angular/core';
 import { TaxService } from 'src/app/common/tax.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SettingsService } from 'src/app/common/settings.service';
+import { take } from 'rxjs/operators';
 
 @Component
 ({
   selector: 'settings',
   templateUrl: 'settings.component.html',
   styleUrls: ['settings.component.sass'],
-  providers: [TaxService]
+  providers: [TaxService, SettingsService]
 })
 
 export class SettingsComponent implements OnInit
 {
-  ts: TaxService;
-  ses: SettingsService;
-  taxCountries: any[] = [];
-  selectedCountry: any[] = [];
-  selectedTaxPayment = '';
-  selectedPeriod = '';
-  periods: any[];
-  intervals: any[];
+  pid: TPid;
   groupControl: FormGroup;
-  meta = <TProjectMeta>{};
+  nameControl: FormControl;
+  startdateControl: FormControl;
+  periodControl: FormControl;
+  taxsystemControl: FormControl;
+  taxpayControl: FormControl;
 
-  get currentCountry(): any[]
+  taxCountries: ITaxCountries[] = [];
+  periods: number[];
+  intervals: string[];
+
+  changed = false;
+
+  get currentTaxSystem(): ITaxCountries | undefined
   {
-    return this.groupControl && this.groupControl.get('taxsystemControl')?.value;
+    if(!this.taxsystemControl) return;
+    const currentTaxCountry = this.taxsystemControl.value;
+    return this.taxCountries.find(tc => tc.name === currentTaxCountry);
   }
 
-  constructor(taxService: TaxService, settingsService: SettingsService)
+  get disabled(): boolean
   {
-    this.ts = taxService;
-    this.ses = settingsService;
+    return !this.ses.paramsCompleted || !this.changed;
+  }
+
+  constructor
+  (
+    private ts: TaxService,
+    public ses: SettingsService
+  )
+  {
+    // TODO: organize somewhere else!
     this.periods = [1, 2, 3];
     this.intervals =
     [
@@ -42,34 +56,61 @@ export class SettingsComponent implements OnInit
       'yearly'
     ];
 
+    // TODO: hardcoded
+    this.pid = 'Ft6eDwkG6I9Gi4Y1RZMM';
+    this.nameControl = new FormControl('', [Validators.required]);
+    this.startdateControl = new FormControl('', [Validators.required]);
+    this.periodControl = new FormControl('', [Validators.required]);
+    this.taxsystemControl = new FormControl('', [Validators.required]);
+    this.taxpayControl = new FormControl('', [Validators.required]);
+
     this.groupControl = new FormGroup
     ({
-      projectnameControl: new FormControl('', [Validators.required]),
-      startdateControl: new FormControl('', [Validators.required]),
-      periodControl: new FormControl('', [Validators.required]),
-      taxsystemControl: new FormControl('', [Validators.required]),
-      taxpayControl: new FormControl('', [Validators.required])
+      nameControl: this.nameControl,
+      startdateControl: this.startdateControl,
+      periodControl: this.periodControl,
+      taxsystemControl: this.taxsystemControl,
+      taxpayControl: this.taxpayControl
     });
-
-    this.groupControl.statusChanges
-      .subscribe(result => this.ses.paramsCompleted = result === 'VALID');
-
-    this.meta.pid = 'hashToBeFetched';
-    this.meta.settings = <TSettings>{};
   }
 
   ngOnInit(): void
   {
+    this.groupControl.statusChanges
+      .subscribe(result => this.ses.paramsCompleted = result === 'VALID');
+    this.ses.load()
+      .subscribe(({ payload }) => this.initForm(payload.data()));
     this.taxCountries = this.ts.getTaxOptions();
   }
 
-  handlerMeta(meta: Record<string, unknown>): void
+  initForm(project: IProject): void
   {
-    Object.assign(this.meta, meta);
+    this.nameControl.setValue(project.name);
+    this.startdateControl.setValue(project.settings.startDate.toDate());
+    this.periodControl.setValue(project.settings.period);
+    this.taxsystemControl.setValue(project.settings.taxSystem);
+    this.taxpayControl.setValue(project.settings.taxInterval);
+
+    this.groupControl.valueChanges
+      .pipe(take(1))
+      .subscribe(() => this.changed = !this.changed);
   }
 
-  handlerSettings(setting: Record<string, unknown>): void
+  saveSettings():void
   {
-    Object.assign(this.meta.settings, setting);
+    const meta: IProjectMeta =
+    {
+      id: this.pid,
+      name: this.nameControl.value,
+      settings:
+      {
+        startDate: this.startdateControl.value,
+        period: this.periodControl.value,
+        taxSystem: this.taxsystemControl.value,
+        taxInterval: this.taxpayControl.value
+      }
+    }
+    this.changed = false;
+    this.ses.save(meta);
   }
 }

@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../common/auth.service';
 import { SettingsService } from 'src/app/common/settings.service';
-import { UserService } from 'src/app/common/user.service';
+import { ProjectService } from 'src/app/common/project.service';
 
 @Component
 ({
@@ -13,23 +13,28 @@ import { UserService } from 'src/app/common/user.service';
   [
     AuthService,
     SettingsService,
-    UserService
+    ProjectService
   ]
 })
-export class ProjectComponent
+export class ProjectComponent implements OnInit
 {
-  pid?: TPid;
-  current?: TProject;
+  id?: TPid;
+  current?: IProject;
 
   constructor
   (
     private route: ActivatedRoute,
     public as: AuthService,
     public ses: SettingsService,
-    public us: UserService,
+    private ps: ProjectService,
   )
   {
-    this.pid = this.route.snapshot.params.id;
-    this.current = this.us.projects.find(p => p.pid === this.pid);
+    this.id = this.route.snapshot.params.id;
+  }
+
+  ngOnInit(): void
+  {
+    this.ps.project
+      .subscribe(({ payload }) => this.current = payload.data());
   }
 }

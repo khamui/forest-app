@@ -1,7 +1,10 @@
 // Type elemental
 declare type TPid = string;
+declare type TUid = string;
+declare type TSheet = [][];
 
-declare type TTaxCountries = {
+// Interface shapes
+declare interface ITaxCountries {
   code: string;
   vat_prefix: string;
   name: string;
@@ -9,38 +12,31 @@ declare type TTaxCountries = {
       name: string;
       rates: number[];
   }[];
-}[]
+}
 
-declare type TSettings = {
-    startDate: Date;
-    period: number;
-    taxSystem: any;
-    taxInterval: any;
-};
+declare interface ISettings {
+  startDate: any;
+  period: number;
+  taxSystem: string;
+  taxInterval: string;
+}
 
-// Type compounds
-declare type TUser = {
+declare interface IUser {
   uid: string;
   name: string;
   email: string;
   projects: TPid[];
 }
 
-declare type TProjectMeta = {
-  pid: TPid;
+declare interface IProjectMeta {
+  id: TPid;
   name: string;
-  settings: TSettings;
+  settings: ISettings;
 }
 
-declare type TSheet = [][];
-
-declare type TProject = {
-  pid: TPid;
-  name: string;
-  settings: TSettings;
+declare interface IProject extends IProjectMeta {
   data: {
     expenses: TSheet;
     revenues: TSheet;
   }
 }
-
