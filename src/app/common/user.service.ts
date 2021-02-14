@@ -20,11 +20,9 @@ enum ETaxInterval {
 export class UserService
 {
   user: IUser | undefined;
-  api: ApiService;
 
-  constructor(api: ApiService)
+  constructor(private api: ApiService)
   {
-    this.api = api;
     this.getUser();
   }
 
