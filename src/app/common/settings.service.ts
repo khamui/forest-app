@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
-import { ProjectService } from 'src/app/common/project.service';
 import { Observable } from 'rxjs';
+import { ProjectService } from 'src/app/common/project.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SettingsService
 {
   paramsCompleted: boolean;
-  ps: ProjectService;
 
-  constructor(private projectService: ProjectService)
+  constructor(private ps: ProjectService)
   {
     this.paramsCompleted = false;
-    this.ps = projectService;
   }
 
   load(): Observable<any>
   {
-    return this.ps.loadProject();
+    return this.ps.project;
   }
 
   save(meta: IProjectMeta): void

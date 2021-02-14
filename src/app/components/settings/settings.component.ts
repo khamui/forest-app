@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TaxService } from 'src/app/common/tax.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SettingsService } from 'src/app/common/settings.service';
-import { take, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Component
 ({
@@ -14,9 +14,6 @@ import { take, tap } from 'rxjs/operators';
 
 export class SettingsComponent implements OnInit
 {
-  #ts: TaxService;
-  ses: SettingsService;
-
   pid: TPid;
   groupControl: FormGroup;
   nameControl: FormControl;
@@ -43,11 +40,12 @@ export class SettingsComponent implements OnInit
     return !this.ses.paramsCompleted || !this.changed;
   }
 
-  constructor(taxService: TaxService, settingsService: SettingsService)
+  constructor
+  (
+    private ts: TaxService,
+    public ses: SettingsService
+  )
   {
-    this.#ts = taxService;
-    this.ses = settingsService;
-
     // TODO: organize somewhere else!
     this.periods = [1, 2, 3];
     this.intervals =
@@ -82,10 +80,10 @@ export class SettingsComponent implements OnInit
       .subscribe(result => this.ses.paramsCompleted = result === 'VALID');
     this.ses.load()
       .subscribe(({ payload }) => this.initForm(payload.data()));
-    this.taxCountries = this.#ts.getTaxOptions();
+    this.taxCountries = this.ts.getTaxOptions();
   }
 
-  initForm(project: IProjectMeta): void
+  initForm(project: IProject): void
   {
     this.nameControl.setValue(project.name);
     this.startdateControl.setValue(project.settings.startDate.toDate());

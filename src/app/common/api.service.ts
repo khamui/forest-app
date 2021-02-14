@@ -2,13 +2,11 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, Action, DocumentSnapshot } from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ApiService
 {
   constructor(private afs: AngularFirestore)
-  {
-    this.afs = afs;
-  }
+  {}
 
   readUser(identifier: string): Observable<Action<DocumentSnapshot<IUser>>>
   {

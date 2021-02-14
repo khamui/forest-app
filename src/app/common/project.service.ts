@@ -2,21 +2,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/common/api.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ProjectService
 {
-  #api: ApiService;
   id: TPid;
+  project: Observable<any> = <Observable<IProject>>{};
 
-  constructor(api: ApiService)
+  constructor(private api: ApiService)
   {
-    this.#api = api;
     this.id = 'Ft6eDwkG6I9Gi4Y1RZMM';
-  }
-
-  loadProject(): Observable<any>
-  {
-    return this.#api.readProject(this.id);
+    this.project = this.api.readProject(this.id);
   }
 
   saveMeta(meta: IProjectMeta): void
@@ -24,6 +19,6 @@ export class ProjectService
     let project: IProject = <IProject>{};
     // TODO: Handle "data" part, not  always empty!
     project = { ...meta, data: { expenses: [], revenues: [] } };
-    this.#api.add(project, 'projects');
+    this.api.add(project, 'projects');
   }
 }

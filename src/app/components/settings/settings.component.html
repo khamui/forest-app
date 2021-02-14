@@ -113,10 +113,16 @@
         (click)="saveSettings()"
         color="primary"
         [disabled]="disabled"
+        [matBadgeHidden]="disabled"
+        matBadge="!"
+        matBadgePosition="after"
       >
         Save
       </button>
-      <div class="settings__action-spinner">
+      <div
+        *ngIf="false"
+        class="settings__action-spinner"
+      >
         <mat-spinner diameter="20">
         </mat-spinner>
       </div>
