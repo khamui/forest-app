@@ -17,6 +17,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SheetsComponent } from './components/sheets/sheets.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { ProjectCardComponent } from './components/project-card/project-card.component';
 
 // Custom Pipes
 import { TaxRatesPipe } from './common/tax-rates.pipe'
@@ -34,7 +35,8 @@ import { ProjectComponent } from './components/project/project.component';
     SettingsComponent,
     TaxRatesPipe,
     ToYearPipe,
-    ProjectComponent
+    ProjectComponent,
+    ProjectCardComponent
   ],
   imports:
   [

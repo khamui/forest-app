@@ -1,9 +1,12 @@
-<p *ngFor="let project of us.user?.projects">
-  <button
-    (click)="this.navigateTo(project)"
-    mat-stroked-button
-    color="primary"
+<div class="dashboard__container">
+  <project-card
+    *ngFor="let project of ps.projects"
+    [project$]="project"
   >
-    {{ project }}
-  </button>
-</p>
+  </project-card>
+  <mat-card
+  class="dashboard__addProjectCard--container"
+  >
+  ADD +
+  </mat-card>
+</div>

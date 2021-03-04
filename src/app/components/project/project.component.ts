@@ -33,7 +33,7 @@ export class ProjectComponent implements OnInit
   {
     this.route.paramMap
       .subscribe(params => this.ps.setId(params.get('id') as TPid));
-    this.ps.project
+    this.ps.project$
       .subscribe(({ payload }) => this.current = payload.data());
   }
 }
