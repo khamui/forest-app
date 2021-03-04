@@ -14,7 +14,7 @@ export class SettingsService
 
   load(): Observable<any>
   {
-    return this.ps.project;
+    return this.ps.project$;
   }
 
   save(meta: IProjectMeta): void

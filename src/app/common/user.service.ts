@@ -1,34 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Action, DocumentSnapshot } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/common/api.service';
-
-// Enums
-enum ECountryCode {
-  AT,
-  BE,
-  DE,
-  PT
-}
-
-enum ETaxInterval {
-  MONTHLY,
-  MONTHLYOFF,
-  TRIMESTRAL,
-  YEARLY
-}
 
 @Injectable({ providedIn: 'root' })
 export class UserService
 {
-  user: IUser | undefined;
+  user$: Observable<Action<DocumentSnapshot<IUser>>>;
 
   constructor(private api: ApiService)
   {
-    this.getUser();
-  }
-
-  getUser(): void
-  {
-    const user$ = this.api.readUser('LzsruTHY2HTyb6FIGTHzTPzQ4MQ2');
-    user$.subscribe(({ payload }) => this.user = payload.data());
+    this.user$ = this.api.readUser('LzsruTHY2HTyb6FIGTHzTPzQ4MQ2');
   }
 }

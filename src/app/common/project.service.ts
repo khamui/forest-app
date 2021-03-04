@@ -6,7 +6,8 @@ import { ApiService } from 'src/app/common/api.service';
 export class ProjectService
 {
   id: TPid = '';
-  project: Observable<any> = <Observable<IProject>>{};
+  project$: Observable<any> = <Observable<IProject>>{};
+  projects: Observable<any>[] = [];
 
   constructor(private api: ApiService)
   {}
@@ -14,12 +15,22 @@ export class ProjectService
   public setId(id: TPid): void
   {
     this.id = id;
-    this.getProject();
+    this.loadProject();
   }
 
-  getProject(): void
+  loadProject(id?: TPid): void
   {
-    this.project = this.api.readProject(this.id);
+    id
+      ? this.projects.push(this.api.readProject(id))
+      : this.project$ = this.api.readProject(this.id);
+  }
+
+  loadProjects(ids: TPid[]): void
+  {
+    for(const id of ids)
+    {
+      this.loadProject(id);
+    }
   }
 
   saveMeta(meta: IProjectMeta): void

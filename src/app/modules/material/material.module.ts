@@ -12,6 +12,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressSpinnerModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatCardModule
   ],
   providers: [MatDatepickerModule, MatNativeDateModule],
 })

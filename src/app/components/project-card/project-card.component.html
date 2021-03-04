@@ -1,0 +1,19 @@
+
+<mat-card
+  class="projectCard__container"
+>
+  <mat-card-header>
+    <mat-card-title>
+      Project: {{ project?.name }}
+    </mat-card-title>
+  </mat-card-header>
+  <img class="projectCard__image" src="https://www.programmersought.com/images/745/ee55645a72715498fe9c9fe8985eaba1.png" />
+  <mat-card-actions class="projectCard__actions">
+    <button
+      mat-button
+      [routerLink]="['/project', project?.id]"
+    >
+      Open Project!
+    </button>
+  </mat-card-actions>
+</mat-card>

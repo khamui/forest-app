@@ -14,13 +14,13 @@ import { take } from 'rxjs/operators';
 
 export class SettingsComponent implements OnInit
 {
-  groupControl: FormGroup;
+  groupControl!: FormGroup;
   projectId: TPid = '';
-  nameControl: FormControl;
-  startdateControl: FormControl;
-  periodControl: FormControl;
-  taxsystemControl: FormControl;
-  taxpayControl: FormControl;
+  nameControl!: FormControl;
+  startdateControl!: FormControl;
+  periodControl!: FormControl;
+  taxsystemControl!: FormControl;
+  taxpayControl!: FormControl;
 
   taxCountries: ITaxCountries[] = [];
   periods: number[];
@@ -56,6 +56,20 @@ export class SettingsComponent implements OnInit
       'yearly'
     ];
 
+    this.initializeForm();
+  }
+
+  ngOnInit(): void
+  {
+    this.groupControl.statusChanges
+      .subscribe(result => this.ses.paramsCompleted = result === 'VALID');
+    this.ses.load()
+      .subscribe(({ payload }) => this.prefillForm(payload.data()));
+    this.taxCountries = this.ts.getTaxOptions();
+  }
+
+  initializeForm(): void
+  {
     this.nameControl = new FormControl('', [Validators.required]);
     this.startdateControl = new FormControl('', [Validators.required]);
     this.periodControl = new FormControl('', [Validators.required]);
@@ -72,16 +86,7 @@ export class SettingsComponent implements OnInit
     });
   }
 
-  ngOnInit(): void
-  {
-    this.groupControl.statusChanges
-      .subscribe(result => this.ses.paramsCompleted = result === 'VALID');
-    this.ses.load()
-      .subscribe(({ payload }) => this.initForm(payload.data()));
-    this.taxCountries = this.ts.getTaxOptions();
-  }
-
-  initForm(project: IProject): void
+  prefillForm(project: IProject): void
   {
     this.projectId = project.id;
     this.nameControl.setValue(project.name);
