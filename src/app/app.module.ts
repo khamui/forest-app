@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 // External Modules
 import { MaterialModule } from './modules/material/material.module';
 import { FirebaseModule } from './modules/firebase/firebase.module';
+import { HotTableModule } from '@handsontable/angular';
 
 // Forest App Components
 import { AppComponent } from './app.component';
@@ -47,7 +48,8 @@ import { ProjectComponent } from './components/project/project.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    FirebaseModule
+    FirebaseModule,
+    HotTableModule
   ],
   bootstrap:
   [
